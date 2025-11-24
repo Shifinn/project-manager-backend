@@ -254,7 +254,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	app.ServeHTTP(w, r)
 }
 
-// // main is the entry point for local development. It is ignored by Vercel.
+// // main is the entry point for local development. It is ignored by Vercel
 // func main() {
 // 	port := "9090"
 // 	log.Printf("INFO: Starting local server on http://localhost:%s\n", port)
