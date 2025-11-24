@@ -274,6 +274,8 @@ log.Println("--- DEBUG: DUMPING ALL KEYS (Values Hidden) ---")
     log.Println("---------------------------------------------")
 
 	databaseURL := os.Getenv("DATABASE_URLS")
+	testURL := os.Getenv("TEST_URL")
+		log.Println("TEST_URL: %s", testURL)
 
 	if databaseURL == "" {
 		// Fallback for local development if the environment variable is not set.
