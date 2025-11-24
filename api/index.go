@@ -253,7 +253,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	app.ServeHTTP(w, r)
 }
 
-// main is the entry point for local development. It is ignored by Vercel.
+// // main is the entry point for local development. It is ignored by Vercel.
 // func main() {
 // 	port := "9090"
 // 	log.Printf("INFO: Starting local server on http://localhost:%s\n", port)
@@ -267,7 +267,7 @@ func openDB() *sql.DB {
 	log.Printf("INFO: Attempting to connect to database with database URL: %s", databaseURL)
 	if databaseURL == "" {
 		// Fallback for local development if the environment variable is not set.
-		databaseURL = "postgres://postgres:12345678@localhost:5432/gudang_garam?sslmode=disable"
+		databaseURL = "postgresql://postgres.jdujcnoojlthzezlgebw:Kx6rdWWKpSztKN3P@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres"
 		log.Println("INFO: DATABASE_URL not set, using local fallback.")
 	}
 
