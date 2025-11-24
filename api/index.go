@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -263,6 +264,17 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 // openDB establishes a connection to the PostgreSQL database.
 // It uses the DATABASE_URL environment variable for establishing the connection
 func openDB() *sql.DB {
+	// DEBUG: Print all available Environment Variable KEYS (not values, for security)
+    log.Println("--- DEBUG: LISTING ALL ENV VARS ---")
+    for _, pair := range os.Environ() {
+        // Split "KEY=VALUE" to just get "KEY"
+        key := strings.Split(pair, "=")[0]
+        if strings.Contains(key, "URL") { 
+            // Only log keys that look like URLs to keep logs clean
+             log.Printf("Found Key: %s", key)
+        }
+    }
+    log.Println("-----------------------------------")
 	databaseURL := os.Getenv("DATABASE_URLS")
 
 	if databaseURL == "" {
