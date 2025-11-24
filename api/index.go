@@ -12,6 +12,7 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/jackc/pgx/v5/stdlib"
+	"github.com/joho/godotenv"
 )
 
 // User represents a user for authentication purposes.
@@ -168,16 +169,16 @@ var (
 // For a Vercel serverless function, this serves as the cold-start entry point.
 func init() {
 	// Establish the database connection pool.
-	// if err := godotenv.Load(); err != nil {
-	// 	log.Println("Error loading .env file")
-	// }
+	if err := godotenv.Load(); err != nil {
+		log.Println("Error loading .env file")
+	}
 	db = openDB()
 	// Create a new Gin router with default middleware.
 	app = gin.Default()
 
 	// Configure CORS (Cross-Origin Resource Sharing) middleware to allow requests from specified frontend origins.
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:4200"}
+	config.AllowOrigins = []string{"http://localhost:4200", "https://project-manager-frontend-olive.vercel.app"}
 	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
 	config.AllowHeaders = []string{"Origin", "Content-Type", "Authorization"}
 	app.Use(cors.New(config))
@@ -252,7 +253,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	app.ServeHTTP(w, r)
 }
 
-// main is the entry point for local development. It is ignored by Vercel.
+// // main is the entry point for local development. It is ignored by Vercel.
 // func main() {
 // 	port := "9090"
 // 	log.Printf("INFO: Starting local server on http://localhost:%s\n", port)
