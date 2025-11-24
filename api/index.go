@@ -1,4 +1,5 @@
 package handler
+
 // package main
 
 import (
@@ -11,6 +12,7 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/jackc/pgx/v5/stdlib"
+	"github.com/joho/godotenv"
 )
 
 // User represents a user for authentication purposes.
