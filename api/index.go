@@ -263,7 +263,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 // openDB establishes a connection to the PostgreSQL database.
 // It uses the DATABASE_URL environment variable for establishing the connection
 func openDB() *sql.DB {
-	databaseURL := os.Getenv("DATABASE_URL")
+	databaseURL := os.Getenv("DATABASE_URLS")
 
 	if databaseURL == "" {
 		// Fallback for local development if the environment variable is not set.
