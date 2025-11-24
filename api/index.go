@@ -267,7 +267,7 @@ func openDB() *sql.DB {
 	log.Printf("INFO: Attempting to connect to database with database URL: %s", databaseURL)
 	if databaseURL == "" {
 		// Fallback for local development if the environment variable is not set.
-		databaseURL = "postgresql://postgres.jdujcnoojlthzezlgebw:Kx6rdWWKpSztKN3P@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres"
+		databaseURL = "ppostgres://postgres:12345678@localhost:5432/gudang_garam?sslmode=disable"
 		log.Println("INFO: DATABASE_URL not set, using local fallback.")
 	}
 
