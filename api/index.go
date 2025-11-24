@@ -169,21 +169,18 @@ var (
 // For a Vercel serverless function, this serves as the cold-start entry point.
 func init() {
 	// Establish the database connection pool.
-	if err := godotenv.Load(); err != nil {
-		log.Println("Error loading .env file")
-	}
+	// if err := godotenv.Load(); err != nil {
+	// 	log.Println("Error loading .env file")
+	// }
 	db = openDB()
 	// Create a new Gin router with default middleware.
 	app = gin.Default()
 
 	// Configure CORS (Cross-Origin Resource Sharing) middleware to allow requests from specified frontend origins.
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:4200", "https://project-manager-frontend-olive.vercel.app"}
+	config.AllowOrigins = []string{"https://project-manager-frontend-olive.vercel.app", "http://localhost:4200"}
 	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
 	config.AllowHeaders = []string{"Origin", "Content-Type", "Authorization"}
-	config.AllowCredentials = true
-	config.ExposeHeaders = []string{"Content-Length"}
-	config.MaxAge = 12 * time.Hour
 	app.Use(cors.New(config))
 
 	// Group all routes under the "/api" prefix for versioning and organization.
@@ -267,6 +264,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 // It uses the DATABASE_URL environment variable for establishing the connection
 func openDB() *sql.DB {
 	databaseURL := os.Getenv("DATABASE_URL")
+	log.Printf("INFO: Attempting to connect to database with database URL: %s", databaseURL)
 	if databaseURL == "" {
 		// Fallback for local development if the environment variable is not set.
 		databaseURL = "postgres://postgres:12345678@localhost:5432/gudang_garam?sslmode=disable"
