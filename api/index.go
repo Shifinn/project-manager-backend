@@ -181,6 +181,9 @@ func init() {
 	config.AllowOrigins = []string{"http://localhost:4200", "https://project-manager-frontend-olive.vercel.app"}
 	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
 	config.AllowHeaders = []string{"Origin", "Content-Type", "Authorization"}
+	config.AllowCredentials = true
+	config.ExposeHeaders = []string{"Content-Length"}
+	config.MaxAge = 12 * time.Hour
 	app.Use(cors.New(config))
 
 	// Group all routes under the "/api" prefix for versioning and organization.
